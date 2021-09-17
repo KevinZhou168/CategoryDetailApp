@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name = "margin">15dp</dimen>
+    <!--use dimens: when setting up layout element attributes, can say @dimens/margin-->
+    <dimen name = "textSize">20dp</dimen>
+</resources>
