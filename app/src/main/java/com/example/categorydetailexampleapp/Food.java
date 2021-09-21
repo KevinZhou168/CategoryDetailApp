@@ -1,6 +1,9 @@
 package com.example.categorydetailexampleapp;
 
-public class Food {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Food implements Parcelable {
     /*
     these final static arrays will represent the data for each category. If we have three
     categories, we will have 3 arrays. Each array can have as many elements as it wants.
@@ -28,13 +31,13 @@ public class Food {
     };
 
     public static final Food[] lunchItems = {
-            new Food("Soup", 8.99, "One bowl of chicken soup", 0),
-            new Food("Salad", 10.99, "One bowl of salad", 0),
+            new Food("Soup", 8.99, "One bowl of chicken soup", R.drawable.soup),
+            new Food("Salad", 10.99, "One bowl of salad", R.drawable.salad),
     };
 
     public static final Food[] dinnerItems = {
-            new Food("Pizza", 11.99, "A large slice of thin crust pizza", 0),
-            new Food("Pasta", 10.99, "One bowl of pasta", 0),
+            new Food("Pizza", 11.99, "Thin crust pizza", R.drawable.pizza),
+            new Food("Pasta", 10.99, "One bowl of pasta", R.drawable.pasta),
     };
 
 
@@ -57,6 +60,79 @@ public class Food {
         this.desc = ""; // default value so we don't get a null pointer error
         imageResourceID = i;
     }
+
+    /** This is a "constructor" of sorts that is needed with the Parceable interface to
+     * tell the intent how to create a Food object when it is received from the intent
+     * basically it is setting each instance variable as a String or Int
+     * if the instance variables were objects themselves you would need to do more complex * code.  We need to read in the String, double, and int data.
+     *
+     * @param parcel    the parcel that is received from the intent
+     */
+
+    public Food(Parcel parcel) {
+        name = parcel.readString();
+        price = parcel.readDouble();
+        desc = parcel.readString();
+        imageResourceID = parcel.readInt();
+    }
+
+    @Override
+    /**
+     * This is what is used when we send the Food object through an intent
+     * It is also a method that is part of the Parceable interface and is needed
+     * to set up the object that is being sent.  Then, when it is received, the
+     * other Food constructor that accepts a Parcel reference can "unpack it"
+     *
+     */
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeDouble(price);
+        dest.writeString(desc);
+        dest.writeInt(imageResourceID);
+    }
+
+    public Food() {
+        name = "";
+        price = 0;
+        desc = "";
+        imageResourceID = 0;
+    }
+
+
+    // this code is needed for the Food class to work with Parcelable
+    // These methods look the same for any class that implements Parcelable
+    // The only diff is the class name used (Ex. Food)
+    public static final Parcelable.Creator<Food> CREATOR = new
+            Parcelable.Creator<Food>() {
+
+                @Override
+                public Food createFromParcel(Parcel parcel) {
+                    return new Food(parcel);
+                }
+
+                @Override
+                public Food[] newArray(int size) {
+                    return new Food[0];
+                }
+            };
+
+    /**
+     * This method is required for the Parceable interface.  As of now, this method * is in the default state and doesn't really do anything.
+     *
+     * If your Parcelable class will have child classes, you'll need to
+     * take some extra care with the describeContents() method. This would
+     * let you identify the specific child class that should be created by
+     * the Parcelable.Creator. You can read more about how this works on
+     *  Stack Overflow with this link.
+     *           https://stackoverflow.com/questions/4778834/purpose-of-describecontents-of-parcelable-interface
+     * @return
+     */
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
 
     /*
     to auto generate code, go to Code --> Generate on the top menu
