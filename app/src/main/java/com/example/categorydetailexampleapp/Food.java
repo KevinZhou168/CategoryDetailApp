@@ -24,7 +24,7 @@ public class Food {
 
     public static final Food[] breakfastItems = {
             new Food("Pancakes", 6.99, "4 pancakes", R.drawable.pancake),
-            new Food("Waffles", 7.50, "Crispy Golden Brown", 0),
+            new Food("Waffles", 7.50, "Crispy Golden Brown", R.drawable.waffles),
     };
 
     public static final Food[] lunchItems = {
