@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Food implements Parcelable {
+
     /*
     these final static arrays will represent the data for each category. If we have three
     categories, we will have 3 arrays. Each array can have as many elements as it wants.
@@ -161,6 +162,10 @@ public class Food implements Parcelable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public int getImageResourceID() {
+        return imageResourceID;
     }
 
     // this toString method is called when we "print"  an object reference.
