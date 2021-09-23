@@ -41,6 +41,7 @@ public class Food implements Parcelable {
     public static final Food[] dinnerItems = {
             new Food("Pizza", 15.99, "Thin crust pizza", R.drawable.pizza),
             new Food("Pasta", 15.99, "One bowl of fettuccine pasta", R.drawable.pasta),
+            new Food("Steak", 20.99, "Medium rare", R.drawable.steak),
     };
 
 
